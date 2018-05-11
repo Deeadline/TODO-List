@@ -14,25 +14,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        TaskManagement.shared.load()
         return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        DataManagement.save(TaskManagement.shared.lists)
+        TaskManagement.shared.store()
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        DataManagement.save(TaskManagement.shared.lists)
+        TaskManagement.shared.store()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
+        TaskManagement.shared.load()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        DataManagement.save(TaskManagement.shared.lists)
+        TaskManagement.shared.store()
     }
 
 

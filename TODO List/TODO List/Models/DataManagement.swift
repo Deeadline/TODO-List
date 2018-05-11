@@ -10,30 +10,41 @@ import Foundation
 
 
 class DataManagement {
-    
-    private static let nameKey = "lists"
 
-    //Archive
-    private static func archive(_ lists: [List]) -> NSData {
-        return NSKeyedArchiver.archivedData(withRootObject: lists) as NSData
+    struct File {
+        static let tasks = NSHomeDirectory() + "/Documents/tasks.txt"
     }
     
-    // Fetch
-    static func fetchList() -> [List]? {
-        guard let unarchiveData = UserDefaults.standard.object(forKey: nameKey) as? Data
-        else { return nil }
+    static func store(taskManagement : TaskManagement) -> Bool {
         
-        return NSKeyedUnarchiver.unarchiveObject(with: unarchiveData) as? [List]
+        do {
+            let fileURL = URL(fileURLWithPath: DataManagement.File.tasks)
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(taskManagement)
+            try data.write(to: fileURL)
+        } catch {
+            print("Error: \(error.localizedDescription)")
+        }
+        
+        return true
     }
     
-    // Save
-    static func save(_ lists: [List]) {
+
+    static func restoreTaskManagement() -> TaskManagement? {
         
-        // Archive
-        let archivedLists = archive(lists)
+        do {
+            
+            let fileURL = URL(fileURLWithPath: DataManagement.File.tasks)
+            let data = try Data(contentsOf: fileURL)
+            let jsonDecoder = JSONDecoder()
+            let taskManagement = try jsonDecoder.decode(TaskManagement.self, from: data)
+            return taskManagement
+            
+        } catch {
+            print("Error: \(error.localizedDescription)")
+        }
         
-        // Set object for key
-        UserDefaults.standard.set(archivedLists, forKey: nameKey)
-        UserDefaults.standard.synchronize()
+        return nil
     }
+    
 }

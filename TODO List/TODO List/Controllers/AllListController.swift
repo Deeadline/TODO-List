@@ -82,21 +82,27 @@ class AllListController: UITableViewController {
                 addAction.isEnabled = !text.trimmingCharacters(in: .whitespaces).isEmpty
    }
     
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+   override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] (action, sourceView, completionHandler) in
+
+            var completedList = false
+            
+            if indexPath.section == 1 {
+                completedList = true
+            }
+            
+            // Remove the task from the appropriate array
+            self?.taskManagement.removeList(at: indexPath.row, completed: completedList)
             
             // Reload table view
             self?.tableView.deleteRows(at: [indexPath], with: .automatic)
-            
-            // Remove the task from the appropriate array
-            self?.taskManagement.removeList(at: indexPath.row)
-            
+                        
             // Indicate that the action was performed
             completionHandler(true)
             
         }
-    }
+        
         deleteAction.title = "Delete"
         deleteAction.backgroundColor = #colorLiteral(red: 1, green: 0.09019607843, blue: 0.2666666667, alpha: 1)
         
@@ -154,28 +160,25 @@ extension AllListController {
     }
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-                let doneAction = UIContextualAction(style: .normal, title: "Done") { (action, sourceView, completionHandler) in
-                    
-                    self.taskManagement.lists[indexPath.row].completed = true
-                    
-                    // Reload table view
-                    let doneList: List = TaskManagement.shared.removeList(at: indexPath)
-                    tableView.deleteRows(at: [indexPath], with: .automatic)
-                    
-                    // Reload table view
-                    TaskManagement.shared.addList(list: doneList, completed: true)
-                    tableView.insertRows(at: [IndexPath(row: 0, section: 1)], with: .automatic)
-                    
-        
-                    // Indicate the action was performed
-                    completionHandler(true)
-                }
-        
-                doneAction.backgroundColor = #colorLiteral(red: 0, green: 0.9019607843, blue: 0.462745098, alpha: 1)
-        
-                return indexPath.section == 0 ? UISwipeActionsConfiguration(actions: [doneAction]) : nil
-            }
+        let doneAction = UIContextualAction(style: .normal, title: "Done") { [weak self] (action, sourceView, completionHandler) in
+            
+            // Reload table view
+            let doneList: List = TaskManagement.shared.removeList(at: indexPath.row, completed: false)
+            self?.tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            // Reload table view
+            TaskManagement.shared.addList(list: doneList, completed: true)
+            self?.tableView.insertRows(at: [IndexPath(row: 0, section: 1)], with: .automatic)
+            
+
+            // Indicate the action was performed
+            completionHandler(true)
+        }
+
+        doneAction.backgroundColor = #colorLiteral(red: 0, green: 0.9019607843, blue: 0.462745098, alpha: 1)
+
+        return indexPath.section == 0 ? UISwipeActionsConfiguration(actions: [doneAction]) : nil
+    }
 }
     
 

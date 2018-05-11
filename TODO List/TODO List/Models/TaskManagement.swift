@@ -8,22 +8,46 @@
 
 import Foundation
 
-class TaskManagement {
-    var lists: [List] = []
-    var completeLists: [List] { return lists.filter{$0.completed} }
-    var incompleteLists: [List] { return lists.filter{!$0.completed} }
+class TaskManagement : Codable {
+
+    static let shared = TaskManagement()
+
+    var completeLists: [List] = []
+    var incompleteLists: [List] = []
     
     
     func addList(list: List, completed: Bool = false) {
+        if completed {
+            completeLists.append(list)
+            return
+        }
         
-        lists.append(list)
+        incompleteLists.append(list)
     }
     
     func removeList(at index: Int, completed: Bool = false) -> List {
-        return lists.remove(at: index)
+        if completed {
+            return completeLists.remove(at: index)
+        }
+        
+        return incompleteLists.remove(at: index)
     }
     
-    static let shared = TaskManagement()
+    func store() -> Bool {
+        return DataManagement.store(taskManagement: self)
+    }
+    
+    func load() -> Bool {
+        
+        guard let restoredTaskManagement = DataManagement.restoreTaskManagement() else {
+            return false
+        }
+        
+        self.completeLists = restoredTaskManagement.completeLists
+        self.incompleteLists = restoredTaskManagement.incompleteLists
+        return true
+    }
+    
 }
 
 
