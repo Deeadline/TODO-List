@@ -10,6 +10,22 @@ import UIKit
 
 class AddListController: UIViewController {
 
+    //Polecam kumplu robic coś takiego ala segregowanie kodu, co mam na myśli?
+    
+    
+    //tutaj zmienne i referencje
+    // MARK: Referencje
+    @IBOutlet weak var textField: UITextField!
+    
+    @IBAction func addList(_ sender: UIButton) {
+        let newList = List(title: textField.text!, tasks: nil, status: false)
+        TaskManagement.shared.addList(list: newList)
+        
+    }
+    
+    //tutaj funkcje takie ogolne z dziedziczenia. to jest spoko to wszystko wiecej nie ruszam
+    //spoko pozdrawiam :D dzieki za rady :D
+    // MARK: Konstruktor
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,15 +37,15 @@ class AddListController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    //tutaj eventy
+    
+    
+    
+    //tutaj funkcje prywatne, polecam funckej prywatne pisac w stylu
+    
+    fileprivate func funkcja() {
+        // bo to jest dość spoko
     }
-    */
+    
 
 }

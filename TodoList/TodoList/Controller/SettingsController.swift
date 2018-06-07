@@ -10,9 +10,31 @@ import UIKit
 
 class SettingsController: UIViewController {
 
+    
+    @IBOutlet weak var sortSwitch: UISwitch!
+    
+    @IBOutlet weak var sortText: UILabel!
+    
+    @IBOutlet weak var addListSwitch: UISwitch!
+    
+    @IBOutlet weak var addListText: UILabel!
+    
+    
+    @IBAction func sortToggled(_ sender: UISwitch) {
+        changeSortText()
+    }
+    
+    
+    @IBAction func addToggled(_ sender: UISwitch) {
+        changeAddListText()	
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        changeSortText()
+        changeAddListText()
+        sortSwitch.addTarget(self, action: #selector(sortToggled(_:)), for: UIControlEvents.valueChanged)
+        addListSwitch.addTarget(self, action: #selector(addToggled(_:)), for: UIControlEvents.valueChanged)
         // Do any additional setup after loading the view.
     }
 
@@ -20,16 +42,19 @@ class SettingsController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func changeSortText(){
+        if sortSwitch.isOn{
+            sortText.text = "Sort by completed task"
+        } else {
+            sortText.text = "Sort by incompleted task"
+        }
     }
-    */
+    func changeAddListText(){
+        if addListSwitch.isOn {
+            addListText.text = "Add completed list to all list"
+        } else {
+            addListText.text = "Remove list permamently"
+        }
+    }
 
 }

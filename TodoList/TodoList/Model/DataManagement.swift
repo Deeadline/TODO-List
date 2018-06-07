@@ -14,26 +14,26 @@ class DataManagement {
     static func save(taskManagement: TaskManagement) -> Bool {
         do{
             let fileURL = URL(fileURLWithPath: filePath)
+            
             let encoder = JSONEncoder()
-            let data = try encoder.encode(taskManagement)
-            try data.write(to: fileURL)
-        } catch {
-            print("Error: \(error.localizedDescription)")
+            let data = try! encoder.encode(taskManagement)
+            try! data.write(to: fileURL)
         }
+        print("Zapisano")
         return true
     }
     
     static func loadData() -> TaskManagement? {
         do {
             let fileURL = URL(fileURLWithPath: filePath)
-            let data = try Data(contentsOf: fileURL)
-            let jsonDecoder = JSONDecoder()
-            let taskManagement = try jsonDecoder.decode(TaskManagement.self, from: data)
-            return taskManagement
-        } catch{
-            print("Error: \(error.localizedDescription)")
+            if FileManager().fileExists(atPath: fileURL.path) {
+                let data = try! Data(contentsOf: fileURL)
+                let jsonDecoder = JSONDecoder()
+                let taskManagement = try! jsonDecoder.decode(TaskManagement.self, from: data)
+                print("Odczytano")
+                return taskManagement
+            }
         }
         return nil
     }
-    
 }

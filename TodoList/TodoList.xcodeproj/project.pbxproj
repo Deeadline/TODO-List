@@ -102,11 +102,11 @@
 		D069EE3120C85EFB006BEF49 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D069EE4020C87F00006BEF49 /* AddListController.swift */,
 				D069EE3820C87E1C006BEF49 /* AllListController.swift */,
 				D069EE3A20C87E30006BEF49 /* CurrentListsController.swift */,
 				D069EE3C20C87E66006BEF49 /* ActualListController.swift */,
 				D069EE3E20C87E74006BEF49 /* SettingsController.swift */,
-				D069EE4020C87F00006BEF49 /* AddListController.swift */,
 				D069EE4220C87F0D006BEF49 /* AddTaskController.swift */,
 			);
 			path = Controller;

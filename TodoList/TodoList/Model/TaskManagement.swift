@@ -8,14 +8,19 @@
 
 import Foundation
 
-class TaskManagement {
+class TaskManagement: Codable {
     static let shared = TaskManagement()
-    
+
     var completeLists: [List] = []
     var lists: [List] = []
+    var moveTo: Bool = false
+    
+    func setMoveTo(value : Bool) {
+        moveTo = value
+    }
     
     func addList(list: List, status: Bool = false) {
-        if status {
+        if status && moveTo {
             completeLists.append(list)
             return
         }
@@ -41,5 +46,9 @@ class TaskManagement {
         self.completeLists = restoredTaskManagement.completeLists
         self.lists = restoredTaskManagement.lists
         return true
+    }
+    
+    func getList() -> [List] {
+        return self.lists
     }
 }

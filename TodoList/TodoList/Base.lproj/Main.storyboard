@@ -54,11 +54,17 @@
                                 <state key="normal" title="Add">
                                     <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="addList:" destination="eUg-Hv-puN" eventType="touchUpInside" id="NO8-HE-B8h"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="fdD-Ln-zTU"/>
                     </view>
+                    <connections>
+                        <outlet property="textField" destination="A8B-QH-ARp" id="0PY-eI-Kns"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cfs-pL-2sV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -165,11 +171,17 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="addTask:" destination="j7y-sV-GHM" eventType="touchUpInside" id="Wy6-NH-L3G"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.98106676339999999" blue="0.57369142770000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="Td9-JX-82b"/>
                     </view>
+                    <connections>
+                        <outlet property="textField" destination="s5p-iS-9uf" id="DtP-kK-cX5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u85-Dv-Drt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -182,14 +194,54 @@
                     <view key="view" contentMode="scaleToFill" id="BFg-j4-bQQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="OG6-vP-9Oi">
+                                <rect key="frame" x="35" y="75" width="49.000000000000057" height="31.000000000000227"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="onTintColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="thumbTintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="sortToggled:" destination="Mhv-Xo-GVH" eventType="valueChanged" id="mkl-SZ-fSy"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sort by incompleted task" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="giD-Sc-Zfn">
+                                <rect key="frame" x="117" y="75" width="199" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uFN-am-8ER">
+                                <rect key="frame" x="35" y="145" width="49.000000000000057" height="31.000000000000227"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="onTintColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="thumbTintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="addToggled:" destination="Mhv-Xo-GVH" eventType="valueChanged" id="32E-wO-pZa"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add completed list to all list" textAlignment="natural" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKM-Wi-tO5">
+                                <rect key="frame" x="117" y="147" width="225" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="9EB-aq-bwg"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" id="NYh-al-T6e"/>
+                    <connections>
+                        <outlet property="addListSwitch" destination="uFN-am-8ER" id="jE5-K7-smJ"/>
+                        <outlet property="addListText" destination="oKM-Wi-tO5" id="JHk-2g-CoW"/>
+                        <outlet property="sortSwitch" destination="OG6-vP-9Oi" id="KTP-Jg-GNd"/>
+                        <outlet property="sortText" destination="giD-Sc-Zfn" id="KFz-8B-Ng6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZAb-kN-cR5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-378" y="896"/>
+            <point key="canvasLocation" x="-378.39999999999998" y="895.50224887556226"/>
         </scene>
         <!--CurrentLists-->
         <scene sceneID="g5G-6l-vYR">
@@ -216,6 +268,7 @@
                 <tabBarController title="Todo Application" automaticallyAdjustsScrollViewInsets="NO" id="jSi-tw-41c" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="woT-9K-hNX">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -232,7 +285,6 @@
         <!--Actual List-->
         <scene sceneID="53m-LR-vag">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2QH-u9-Gzk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController title="Actual List" automaticallyAdjustsScrollViewInsets="NO" id="dJj-K3-9ef" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rjd-fY-MrC">
@@ -244,6 +296,7 @@
                         <segue destination="rPO-o3-MzN" kind="relationship" relationship="rootViewController" id="DxT-4U-TKD"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2QH-u9-Gzk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2480.8000000000002" y="850.52473763118451"/>
         </scene>
