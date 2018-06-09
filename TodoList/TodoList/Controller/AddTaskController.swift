@@ -14,6 +14,10 @@ class AddTaskController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     
     @IBAction func addTask(_ sender: UIButton) {
+        let newTask = Task(name: textField.text!, status: false)
+        TaskManagement.shared.getList(selectedList).addTask(task: newTask)
+        textField.text = ""
+        textField.placeholder = "Add more?"
         
     }
     override func viewDidLoad() {

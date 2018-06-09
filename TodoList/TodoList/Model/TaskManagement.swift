@@ -19,21 +19,32 @@ class TaskManagement: Codable {
         moveTo = value
     }
     
-    func addList(list: List, status: Bool = false) {
-        if status && moveTo {
-            completeLists.append(list)
-            return
-        }
+    func addList(list: List) {
+
         lists.append(list)
     }
     
-    func removeList(at index: Int, status: Bool = false) -> List{
-        if status {
-            return completeLists.remove(at: index)
+    func addToCompleteList(list: List) {
+        if moveTo {
+            completeLists.append(list)
         }
-        return lists.remove(at: index)
     }
     
+    func removeList(at index: Int){
+        lists.remove(at: index)
+    }
+    
+    func removeCompletedList(at index: Int) {
+        completeLists.remove(at: index)
+    }
+    
+    func sort(by: Int) {
+        if(by == 1){
+            lists.sort(by: {$0.status && !$1.status})
+        } else {
+            lists.sort(by: {!$0.status && $1.status})
+        }
+    }
     func save() -> Bool {
         return DataManagement.save(taskManagement: self)
     }
@@ -48,7 +59,20 @@ class TaskManagement: Codable {
         return true
     }
     
-    func getList() -> [List] {
+    func getCompletedList(_ row: Int) -> List {
+        return self.completeLists[row]
+    }
+    
+    func getCompletedLists() -> [List] {
+        return self.completeLists
+    }
+    
+    func getList(_ row: Int) -> List {
+        return self.lists[row]
+    }
+    
+    func getLists() -> [List] {
         return self.lists
     }
+    
 }

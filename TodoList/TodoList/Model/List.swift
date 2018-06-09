@@ -11,9 +11,9 @@ import Foundation
 class List : Codable {
     var title:String
     var status:Bool
-    var tasks: [Task]?
+    var tasks: [Task]
 
-    init(title: String, tasks: [Task]?, status: Bool = false) {
+    init(title: String, tasks: [Task], status: Bool = false) {
         self.title = title
         self.tasks = tasks
         self.status = status
@@ -22,8 +22,49 @@ class List : Codable {
     func setStatus(status: Bool) {
         self.status = status
     }
+    
     func addTask(task: Task){
-        tasks?.append(task)
+        tasks.append(task)
+    }
+    
+    func getTasks() -> [Task] {
+        return tasks
+    }
+    
+    func getTask(_ index: Int) -> Task {
+        return tasks[index]
+    }
+    
+    func removeTask(at index: Int, status: Bool = false){
+        tasks.remove(at: index)
+    }
+    
+    func getListTitle() -> String {
+        return self.title
+    }
+    
+    func getListStatus() -> Bool {
+        return self.status
+    }
+    
+    func getTaskTitle(_ index: Int) -> String? {
+        if tasks.count > 0 {
+            return tasks[index].name
+        }
+        return nil
+    }
+    
+    func getTaskStatus(_ index: Int) -> Bool? {
+        if tasks.count > 0 {
+            return tasks[index].status
+        }
+        return nil
+    }
+    
+    func setTaskStatus(status: Bool, _ index: Int) {
+        if tasks.count > 0 {
+            tasks[index].status = status
+        }
     }
 }
 

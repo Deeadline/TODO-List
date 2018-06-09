@@ -18,8 +18,10 @@ class AddListController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     
     @IBAction func addList(_ sender: UIButton) {
-        let newList = List(title: textField.text!, tasks: nil, status: false)
+        let newList = List(title: textField.text!, tasks: [], status: false)
         TaskManagement.shared.addList(list: newList)
+        textField.text = ""
+        textField.placeholder = "Add more?"
         
     }
     
