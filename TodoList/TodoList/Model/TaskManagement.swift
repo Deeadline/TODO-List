@@ -14,7 +14,7 @@ class TaskManagement: Codable {
     var completeLists: [List] = []
     var lists: [List] = []
     var moveTo: Bool = false
-    
+    var sort: Bool = false
     func setMoveTo(value : Bool) {
         moveTo = value
     }
@@ -37,13 +37,9 @@ class TaskManagement: Codable {
     func removeCompletedList(at index: Int) {
         completeLists.remove(at: index)
     }
-    
-    func sort(by: Int) {
-        if(by == 1){
-            lists.sort(by: {$0.status && !$1.status})
-        } else {
-            lists.sort(by: {!$0.status && $1.status})
-        }
+
+    func setSort(_ sort: Bool) {
+        self.sort = sort
     }
     func save() -> Bool {
         return DataManagement.save(taskManagement: self)

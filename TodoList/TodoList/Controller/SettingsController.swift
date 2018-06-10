@@ -45,10 +45,10 @@ class SettingsController: UIViewController {
     func changeSortText(){
         if sortSwitch.isOn{
             sortText.text = "Sort by completed task"
-            TaskManagement.shared.sort(by: 1) // sort asc
+            TaskManagement.shared.setSort(true) // sort asc
         } else {
             sortText.text = "Sort by incompleted task"
-            TaskManagement.shared.sort(by: 0) // desc
+            TaskManagement.shared.setSort(false) // desc
         }
     }
     func changeAddListText(){

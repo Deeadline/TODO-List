@@ -36,7 +36,7 @@ class CurrentListsController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        cell.textLabel?.text = TaskManagement.shared.getList(selectedList).getListTitle()
+        cell.textLabel?.text = TaskManagement.shared.getList(indexPath.row).getListTitle()
         return cell
     }
     

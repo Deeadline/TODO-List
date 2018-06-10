@@ -46,6 +46,13 @@ class List : Codable {
     func getListStatus() -> Bool {
         return self.status
     }
+    func sort(_ condition: Bool) {
+        if condition == true {
+            tasks.sort(by: {$0.status && !$1.status})
+        } else {
+            tasks.sort(by: {!$0.status && $1.status})
+        }
+    }
     
     func getTaskTitle(_ index: Int) -> String? {
         if tasks.count > 0 {
